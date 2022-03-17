@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+  }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+#Navbar {
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+  }
+
+#Navbar a {
+    display: block;
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+#Navbar .active {
+    text-decoration: underline;
+  }
+  
+#Navbar a:hover, .button:hover{
+    background: #ddd;
+    color: black;
+  }
+
+#LandPage {
+    height: 100vh;
+    margin-top: 25vh;
+  }
+
+#LandPage img {
+    width: 50vw;
+  }
+
+    @media (min-width: 700px){ 
+        #LandPage img { 
+            width: 30vw;
+          }
+      }
+  
+    @media (min-width: 1000px){   
+        #LandPage img {
+            width: 25vw;
+          }
+      }
+
+.button {
+    color: white;
+    background-color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-top: 100px;
+    width: 20vw;
+  }
+
+h1 {
+    font-size: 4em;
+    font-family: 'Allison';
+	  text-align: center;
+    margin: 0;
+  }
+
+h2 {
+    font-family: 'Allison';
+	  text-align: center;
+    font-size: 3em;
+  }
+
+h3 {
+  text-align: center;
+  font-size: 1em;
+}
+
+p {
+  text-align: center;
+  font-size: 0.7em;
+}
+  
+    @media (min-width: 700px){ 
+        h1 { 
+            font-size: 4.25em;
+          }
+        h2 {
+          font-size: 3.5em;
+        }
+        p {
+          font-size: 1em;
+        }
+      }
+
+    @media (min-width: 1000px){   
+        h1 {
+            font-size: 4.75em;
+          }
+        h2 {
+          font-size: 4em;
+        }
+        h3 {
+          font-size: 1.75em;
+        }
+        p {
+          font-size: 1.5em;
+        }
+      }
+
+* {
+  box-sizing: border-box;
+}
+
+#Recipes {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#Recipes img {
+  width: 100%;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  margin: 2px;
+}
+
+.col-1 {width: 30%;}
+.col-2 {width: 30%;}
+.col-3 {width: 30%;}
