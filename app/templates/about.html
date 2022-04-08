@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html>
-
-  <head lang="en-US">
-
-    <meta charset="utf-8">
-
-    <title>Cheffing - About</title>
-    <meta name="author" content="Alsje Lourens">
-
-    <meta name="description" content="Cheffing is a food blog for professional freelancer chefs
-            to share their recipes with you and promote themselves and their services.">
-    <meta name="keywords" content="Recipes, Chefs, Cook, Dine, Serve, Cater">
-    <link rel="icon" href="cheffing.ico" type="image/x-icon">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="stylesheet.css">
-    <script src="script.js" defer></script>
-
-    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');</style>
-    <style> @import url('https://fonts.googleapis.com/css2?family=Allison&family=Montserrat:wght@100;400&display=swap');</style>
-
-  </head>
-
-
-<!-- Navigation bar -->
-  <header>
-    <div id="Navbar">    
-        <a href="signin.html">Sign In</a>
-        <a href="about.html" class="active">About</a>
-        <a href="index.html">Home</a>
-    </div>
-  </header>
-
-
-  <body>
-
+  {% extends 'base.html' %}
+  {% set active_page = 'about' %}
+  {% block title %}About Cheffing{% endblock %}
+  
+  {% block body %}
 <!-- Landing page -->
     <div id="LandPage">
         <h1>About</h1>
@@ -43,24 +12,11 @@
         <a href="#" class="button center">Join Us</a>
     </div>
 
-<!-- Recipes -->
+<!-- Chefs -->
     <div id="Chefs">
         <h2>Our Chefs</h2>
         <p>Chefs coming soon...</p>
     </div>
-
-
-  </body>
-
-
-<!-- Footer -->
-  <footer>
-    <div id="SocialMediaLinks">
-        <a href="#">
-            <img src="" alt="Social media icon">
-        </a>
-    </div>
-<!-- Add all social media links, phone number and email address -->
-  </footer>
+  {% endblock %}
 
 </html>

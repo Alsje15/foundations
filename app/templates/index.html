@@ -1,46 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+{% extends 'base.html' %}
+{% set active_page = 'home' %}
+{% block title %}Cheffing{% endblock %}
 
-  <head lang="en-US">
-
-    <meta charset="utf-8">
-
-    <title>Cheffing</title>
-    <meta name="author" content="Alsje Lourens">
-
-    <meta name="description" content="Cheffing is a food blog for professional freelancer chefs
-            to share their recipes with you and promote themselves and their services.">
-    <meta name="keywords" content="Recipes, Chefs, Cook, Dine, Serve, Cater">
-    <link rel="icon" href="cheffing.ico" type="image/x-icon">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="stylesheet.css">
-    <script src="script.js" defer></script>
-
-    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');</style>
-    <style> @import url('https://fonts.googleapis.com/css2?family=Allison&family=Montserrat:wght@100;400&display=swap');</style>
-
-  </head>
-
-
-<!-- Navigation bar -->
-  <header>
-    <div id="Navbar">    
-        <a href="signin.html">Sign In</a>
-        <a href="about.html">About</a>
-        <a href="index.html" class="active">Home</a>
-    </div>
-  </header>
-
-
-  <body>
-
+{% block body %}
 <!-- Landing page -->
     <div id="LandPage">
-        <h1>Welcome to</h1>
-        <img src="assets/logo.svg" alt="Cheffing's logo." class="center">
-        <a href="about.html" class="button center">Contact Us</a>
+        <h1>Welcome to {{slug}}</h1>
+        <img src="/static/assets/logo.svg" alt="Cheffing's logo." class="center">
+        <a href="/about" class="button center">Contact Us</a>
     </div>
 
 <!-- Recipes -->
@@ -49,36 +18,23 @@
 
         <div class="col-1">
           <h3>Recipe Title 1</h3>
-          <img src="assets/logo.svg">
+          <img src="/static/assets/logo.svg">
           <p> Recipe description </p>
         </div>
 
         <div class="col-2">
           <h3>Recipe Title 2</h3>
-          <img src="assets/logo.svg">
+          <img src="/static/assets/logo.svg">
           <p> Recipe description </p>
         </div>
 
         <div class="col-3">
           <h3>Recipe Title 3</h3>
-          <img src="assets/logo.svg">
+          <img src="/static/assets/logo.svg">
           <p> Recipe description </p>
         </div>
 
     </div>
-
-
-  </body>
-
-
-<!-- Footer -->
-  <footer>
-    <div id="SocialMediaLinks">
-        <a href="#">
-            <img src="" alt="Social media icon">
-        </a>
-    </div>
-<!-- Add all social media links, phone number and email address -->
-  </footer>
+{% endblock %}
 
 </html>
