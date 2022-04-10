@@ -1,33 +1,21 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask
+from . import routes
+from app.extensions.database import db, migrate
 
-app = Flask(__name__)
-app.config.from_object('app.config')
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.config')
 
-# static routes
-@app.route('/')
-def index():
-    return render_template('index.html')
+    register_extensions(app)
+    register_blueprints(app)
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+    return app
 
-@app.route('/signin')
-def singin():
-    return render_template('signin.html')
-
-@app.route('/addrecipe')
-def addrecipe():
-    return render_template('addrecipe.html')
-
-# dynamic routes
-slug = 349
-
-@app.route('/recipe/<slug>')
-def recipe(slug):
-    return render_template('recipe.html', slug=slug)
+# Initialise blueprints
+def register_blueprints(app:Flask):
+    app.register_blueprint(routes.routes.blueprint)
 
 # Initialise db
-# def register_extensions(app:Flask):
-#     db.init__app(app)
-#     migrate.init__app(app, db)
+def register_extensions(app:Flask):
+    db.init_app(app)
+    migrate.init_app(app, db)
