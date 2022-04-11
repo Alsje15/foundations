@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Alsje Lourens">
+    <meta name="description" content="Cheffing is a food blog for professional freelancer chefs
+            to share their recipes with you and promote themselves and their services.">
+    <meta name="keywords" content="Recipes, Chefs, Cook, Dine, Serve, Cater">
+    <link rel="icon" href="cheffing.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/static/css/stylesheet.css">
+    <!-- <script src="/static/css/script.js" defer></script> -->
+
+    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');</style>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Allison&family=Montserrat:wght@100;400&display=swap');</style>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+  <!-- Navigation Bar -->
+  <header>
+    {% block header %}
+    <div id="Navbar">  
+        <a href="/addrecipe" class="{{ 'active' if active_page == 'addrecipe' else '' }}">Add Recipe</a>  
+        <a href="/signin" class="{{ 'active' if active_page == 'signin' else '' }}">Sign In</a>
+        <a href="/about" class="{{ 'active' if active_page == 'about' else '' }}">About</a>
+        <a href="/" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
+    </div>
+    {% endblock %}
+  </header>
+
+  <body>
+    {% block body %}{% endblock %}
+  </body>
+
+  <!-- Footer -->
+  <footer>
+    <div id="SocialMediaLinks">
+        <a href="#">
+            <img src="" alt="Social media icon">
+        </a>
+    </div>
+<!-- Add all social media links, phone number and email address -->
+  </footer>
+
+</html>
