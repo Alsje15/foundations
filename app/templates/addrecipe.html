@@ -7,10 +7,35 @@
   {% block body %}
 
 <!-- Post Recipe -->
-    <div id="Addrecipe">
-        <h2>Hello, Chef.</h2>
-        <p>More coming soon to add a recipe...</p>
+  <form id="Form" method="POST" class="has-text-centered">
+    <h2>Add your Recipe</h2>
+    <div id="CustomUpload">
+      <label for="image">Cover Photo</label>
+      <input type="file" name="image" id="image">
     </div>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div>
+      <label for="category">Category</label>
+      <select placeholder="Other" name="category" id="category">
+        <option value="1">Other</option>
+        <option value="2">Breakfast</option>
+      </select>
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea placeholder="Shortly describe what the recipe is for." type="text" name="description" id="description"></textarea>
+    </div>
+    <div>
+      <label for="instructions">Instructions</label>
+      <textarea placeholder="Instructions go here. &#10&#10 &#8226 Ingredient &#10 &#8226 Ingredient &#10 &#8226 Ingredient" type="text" name="instructions" id="instructions"></textarea>
+    </div>
+      <input class="button is-dark" type="submit" value="Add">
+    </div>
+  </form>
+
   {% endblock %}
 
 </html>

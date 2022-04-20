@@ -5,18 +5,50 @@
   {% block title %}About Cheffing{% endblock %}
   
   {% block body %}
-<!-- Landing page -->
-    <div id="LandPage">
-        <h1>About</h1>
-        <img src="assets/logo.svg" alt="Cheffing's logo." class="center">
-        <a href="#" class="button center">Join Us</a>
-    </div>
 
-<!-- Chefs -->
-    <div id="Chefs">
-        <h2>Our Chefs</h2>
-        <p>Chefs coming soon...</p>
+  <!-- Landing page -->
+  <div id="LandPage" class="has-text-centered">
+    <h1>About</h1>
+    <div>
+      <img src="../static/images/logo.png" alt="Cheffing's logo.">
     </div>
-  {% endblock %}
+    <p>Cheffing provides a communal space for freelance chefs and caterers in Germany to share recipes, network and gain some exposure.</p>
+    <a href="#JoinUs" class="button is-dark">Join Us</a>
+  </div>
+
+  <!-- Authors -->
+  <div id="Grid" class="has-text-centered">
+    <h2>Our Chefs</h2>
+    <div class="container">
+      {% for row in chefs_pagination.items|batch(3) %}
+      <div class="columns">
+        {% for chef in row %}
+        <div class="column">
+          <h3>{{ chef.name }}</h3>
+          <img src="{{ chef.image }}" alt="A picture relevant to the recipe."/>
+          <p>{{ chef.description }}</p>
+          <p>Email me at <a class="email-link" href="mailto:{{ chef.email }}?='Mail from Cheffing'" target="_blank">{{ chef.email }}</a></p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<!-- Pagination -->
+  <nav class="box has-text-centered">
+  {% if chefs_pagination.prev_num %}
+    <a class="button is-dark" href="/?page={{ chefs_pagination.prev_num }}">Previous Page</a>
+  {% else %}
+    <span class="button">Previous Page</span>
+  {% endif %}
+
+  {% if chefs_pagination.next_num %}
+    <a class="button is-dark" href="/?page={{ chefs_pagination.next_num }}">Next Page</a>
+  {% else %}
+    <span class="button">Next Page</span>
+  {% endif %}
+  </nav>
+{% endblock %}
 
 </html>

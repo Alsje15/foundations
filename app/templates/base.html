@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
     <meta charset="utf-8">
@@ -12,9 +12,9 @@
     <link rel="icon" href="cheffing.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/static/css/stylesheet.css">
-    <!-- <script src="/static/css/script.js" defer></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script src="/static/js/script.js" defer></script>
 
-    <style> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');</style>
     <style> @import url('https://fonts.googleapis.com/css2?family=Allison&family=Montserrat:wght@100;400&display=swap');</style>
 
     <title>{% block title %}{% endblock %}</title>
@@ -23,12 +23,24 @@
   <!-- Navigation Bar -->
   <header>
     {% block header %}
-    <div id="Navbar">  
-        <a href="/addrecipe" class="{{ 'active' if active_page == 'addrecipe' else '' }}">Add Recipe</a>  
-        <a href="/signin" class="{{ 'active' if active_page == 'signin' else '' }}">Sign In</a>
-        <a href="/about" class="{{ 'active' if active_page == 'about' else '' }}">About</a>
-        <a href="/" class="{{ 'active' if active_page == 'home' else '' }}">Home</a>
-    </div>
+    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <img class="navbar-item" src="../static/images/logo-sml.png">
+        <a role="button" id="Burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="Nav-links" class="navbar-menu is-dark">
+        <div class="navbar-end">
+          <a href="/" class="{{ 'active' if active_page == 'home' else '' }} navbar-item">Home</a>
+          <a href="/about" class="{{ 'active' if active_page == 'about' else '' }} navbar-item">About</a>
+          <a href="/signin" class="{{ 'active' if active_page == 'signin' else '' }} navbar-item">Sign In</a>
+          <a href="/addrecipe" class="{{ 'active' if active_page == 'addrecipe' else '' }} navbar-item">Add Recipe</a>  
+        </div>
+      </div>
+    </nav>
     {% endblock %}
   </header>
 
@@ -37,13 +49,22 @@
   </body>
 
   <!-- Footer -->
-  <footer>
-    <div id="SocialMediaLinks">
-        <a href="#">
-            <img src="" alt="Social media icon">
-        </a>
+  <footer class="footer has-text-centered">
+    <div class="sm-links">
+      <a href="https://pinterest.com"><img src=/static/images/icon-pi.png/></a>
+      <a href="https://facebook.com"><img src=/static/images/icon-fb.png/></a>
+      <a href="https://instagram.com"><img src=/static/images/icon-ig.png/></a>
+      <a href="https:/linkedin.com"><img src=/static/images/icon-li.png/></a>
+    </div>  
+    <div id="JoinUs">
+      <p>Email me at <a class="email-link" href="mailto:alsje@cheffing.de?='Mail from Cheffing'" target="_blank">alsje@cheffing.de</a> to join our community.</p>
     </div>
-<!-- Add all social media links, phone number and email address -->
-  </footer>
+    <img src="/static/images/logo-sml2.png" alt="Social media icon">
+    <div class="small-p">
+      <p>Berlin, Kreuzberg</p>
+      <p>All Rights Reserved - 2022</p>
+      <p>Designed and Developed by Alsje Lourens</p>
+    </div>
+ </footer>
 
 </html>

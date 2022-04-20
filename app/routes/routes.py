@@ -1,20 +1,25 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request, current_app
 from .models import Recipe, Chef
-
-recipes_data = {
-    'tomato-soup':{'name':'Tomato Soup', 'category':'1'},
-    'lemon-cake':{'name':'Lemon Cake', 'category':'2'},
-}
 
 blueprint = Blueprint('routes',__name__)
 
 @blueprint.route('/')
 def index():
-    return render_template('index.html')
+    page_number = request.args.get('page', 1, type=int)
+    #category = request.args.get('filter_by', 1, type=int)
+    recipes_pagination = Recipe.query.paginate(page_number, current_app.config['RECIPES_PER_PAGE'])
+    return render_template('index.html', recipes_pagination=recipes_pagination)
+
+@blueprint.route('/<slug>')
+def recipe(slug):
+    recipe = Recipe.query.filter_by(slug=slug).first_or_404()
+    return render_template('recipe.html', recipe=recipe)
 
 @blueprint.route('/about')
 def about():
-    return render_template('about.html')
+    page_number = request.args.get('page', type=int)
+    chefs_pagination = Chef.query.paginate(page_number, current_app.config['CHEFS_PER_PAGE'])
+    return render_template('about.html', chefs_pagination=chefs_pagination)
 
 @blueprint.route('/signin')
 def singin():
@@ -24,18 +29,35 @@ def singin():
 def sign_in():
     return redirect(url_for('signin.html'))
 
-@blueprint.route('/addrecipe')
-def addrecipe():
-    return render_template('addrecipe.html')
+@blueprint.get('/addrecipe')
+def addrecipe_get():
+    recipe = Recipe.query.all()
+    return render_template('addrecipe.html', recipe=recipe)
 
-@blueprint.route('/recipe/<slug>')
-def recipe(slug):
-    if slug in recipes_data:
-        return render_template('recipe.html', recipe=recipes_data[slug]['name'])
-        # return '<h1>' + recipes_data[slug]['name'] + '</h1>'
-    else:
-        return 'Sorry that recipe does not exist.'
+@blueprint.post('/addrecipe')
+def addrecipe_post():
+    recipe = Recipe.query.all()
 
-# @blueprint.route('/recipe')
-# def recipe():
-#     return render_template('recipe.html', recipe=recipes_data)
+    recipe = Recipe(
+        # generate slug and get id?
+        slug=request.form.get('slug'),
+        image=request.form.get('image'),
+        title=request.form.get('title'),
+        category=request.form.get('category'),
+        description=request.form.get('description'),
+        instructions=request.form.get('instructions'),
+        chef_id=request.form.get('chef_id')
+    )
+
+    if not all([
+        request.form.get('title'),
+        request.form.get('description'),
+        request.form.get('instructions'),
+    ]):
+        return render_template('addrecipe.html', recipe=recipe, error='Please fill out all fields.')
+        
+    recipe.save()
+
+    # Does this work? Going back to index when saved
+    # How to edit if yours? Same with about
+    return render_template('index.html', recipe=recipe)

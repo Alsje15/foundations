@@ -1,47 +1,23 @@
-body {
-    margin: 0;
-    font-family: 'Montserrat';
-    /* Hide scrollbar for IE, Edge and Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+/* NAVBAR */
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-body::-webkit-scrollbar {
-    display: none;
-  }
-
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-#Navbar {
+#Nav-links {
     background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 50px;
-  }
+  } 
 
-#Navbar a {
-    display: block;
-    float: right;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-#Navbar .active {
+#Nav-links .active {
     text-decoration: underline;
   }
-  
-#Navbar a:hover, .button:hover{
-    background: #ddd;
-    color: black;
+
+#Nav-links a {
+    background-color: #333;
+    color: white;
   }
+
+#Nav-links a:hover {
+    font-weight: bolder;
+  }
+
+/* LANDING PAGES */
 
 #LandPage {
     height: 100vh;
@@ -64,91 +40,196 @@ body::-webkit-scrollbar {
           }
       }
 
-.button {
-    color: white;
-    background-color: #333;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    margin-top: 100px;
-    width: 20vw;
-  }
-
-h1 {
-    font-size: 4em;
-    font-family: 'Allison';
-	  text-align: center;
-    margin: 0;
-  }
-
-h2 {
-    font-family: 'Allison';
-	  text-align: center;
-    font-size: 3em;
-  }
-
-h3 {
-  text-align: center;
-  font-size: 1em;
+#LandPage a {
+  margin-top: 5vh;
 }
 
-p {
-  text-align: center;
-  font-size: 0.7em;
+#LandPage p {
+  margin: 10vh 10vh 0vh 10vh;
 }
-  
-    @media (min-width: 700px){ 
-        h1 { 
-            font-size: 4.25em;
-          }
-        h2 {
-          font-size: 3.5em;
-        }
-        p {
-          font-size: 1em;
-        }
-      }
 
-    @media (min-width: 1000px){   
-        h1 {
-            font-size: 4.75em;
-          }
-        h2 {
-          font-size: 4em;
-        }
-        h3 {
-          font-size: 1.75em;
-        }
-        p {
-          font-size: 1.5em;
-        }
-      }
+/* GLOBAL */
 
 * {
   box-sizing: border-box;
 }
 
-#Recipes {
+body {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.button {
+    min-width: 130px;
+}
+
+h1 {
+    font-size: 4.5em !important;
+    font-family: 'Allison';
+    color: black;
+    margin: 0;
+  }
+
+h2 {
+    font-family: 'Allison';
+    font-size: 4em !important;
+    color: black;
+  }
+
+h3 {
+  font-family: 'Montserrat';
+  font-size: 1.5em !important;
+  color: black;
+  margin-top: 20px !important;
+}
+
+p {
+  font-family: 'Montserrat';
+}
+
+.small-p {
+  font-size: small;
+}
+
+.email-link {
+  color: black;
+  font-weight: bolder;
+}
+
+/* GRID (HOME AND ABOUT) */
+#Grid {
+  margin: 0px 40px 50px 40px !important;
+}
+
+#Grid img {
+  width: 80%;
+  margin: auto;
+}
+
+#Grid p {
+  margin: 15px;
+}
+
+#Grid .button {
+  margin: 20px;
+}
+
+.column {
+  margin: 25px !important;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px #b6b6b6;
+  display: flex !important;
+  flex-direction: column;
+}
+
+  @media (max-width: 800px){ 
+    .column { 
+        margin: 50px 0px 50px 0px !important;
+      }
+  }
+  
+.column a {
+  margin-top: auto;
   margin-left: auto;
   margin-right: auto;
+  align-self: center;;
+  max-width: 80px;
 }
 
-#Recipes img {
-  width: 100%;
+/* PAGINATION */
+
+.box {
+  margin-bottom: 60px !important;
+  box-shadow: none !important;
 }
 
-.row::after {
-  content: "";
-  clear: both;
+/* RECIPE PAGE */
+#Recipe h2 {
+  margin-top: 5vh;
+}
+
+  @media (max-width: 415px){ 
+    #Recipe h2 { 
+        font-size: 2.5em !important;
+      }
+  }
+
+#Recipe img {
+  max-width: 80vw;
+}
+
+#Recipe a {
+  margin: 10vh;
+}
+
+#Recipe p {
+  margin: 5vh 20vw 0vh 20vw;
+}
+
+/* FORM */
+#Form h2 {
+  margin: 3vh;
+}
+
+#Form label {
   display: block;
+  font-family: 'Montserrat';
+  font-weight: bolder;
 }
 
-[class*="col-"] {
-  float: left;
-  padding: 15px;
-  margin: 2px;
+/* targets the "Choose File" button of file input */
+input[type=file]::file-selector-button {
+  display: none;
 }
 
-.col-1 {width: 30%;}
-.col-2 {width: 30%;}
-.col-3 {width: 30%;}
+/* targets the "file chosen" of file input */
+#image {
+  color: #fff;
+  background-color: #333;
+  border-radius: 3px;
+  width: 35vh;
+}
+
+#Form input, textarea, select {
+  overflow: hidden;
+  resize: none;
+  font-family: 'Montserrat';
+  font-size: medium;
+  padding: 2vh !important;
+  margin: 2vh 0vh 3vh 0vh !important;
+}
+
+#Form .button {
+  margin: 3vh;
+  padding: 0 !important;
+}
+
+#description {
+  width: 75%;
+  height: 20vh;
+}
+
+#instructions {
+  width: 75%;
+  height: 50vh;
+}
+
+/* FOOTER */
+
+.sm-links a {
+  opacity: 0.8;
+}
+
+.sm-links a:hover {
+  opacity: 1;
+}
+
+.footer img {
+  padding: 4vw 5vw 4vw 5vw;
+}

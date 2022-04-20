@@ -6,35 +6,49 @@
 
 {% block body %}
 <!-- Landing page -->
-    <div id="LandPage">
-        <h1>Welcome to</h1>
-        <img src="../static/images/1.png" alt="Cheffing's logo." class="center">
-        <a href="/about" class="button center">Contact Us</a>
-    </div>
+  <div id="LandPage" class="has-text-centered">
+      <h1>Welcome to</h1>
+      <div>
+        <img src="../static/images/logo.png" alt="Cheffing's logo.">
+      </div>
+      <a href="/about" class="button is-dark">About Us</a>
+  </div>
 
 <!-- Recipes -->
-    <div id="Recipes">
-        <h2>Our Recipes</h2>
-
-        <div class="col-1">
-          <h3>Recipe Title 1</h3>
-          <img src="app/assets/logo.svg">
-          <p> Recipe description </p>
+  <div id="Grid" class="has-text-centered">
+      <h2>Our Recipes</h2>
+      <div class="container">
+        {% for row in recipes_pagination.items|batch(3) %}
+        <div class="columns">
+          {% for recipe in row %}
+          <div class="column">
+            <h3>{{ recipe.title }}</h3>
+            <p class="small-p is-italic">Recipe by {{ recipe.chef_id }}</p>
+            <img src="{{ recipe.image }}" alt="A picture relevant to the recipe."/>
+            <p>{{ recipe.description }}</p>
+            <a class="button is-dark is-small" href="/{{ recipe.slug }}">VIEW</a>
+          </div>
+          {% endfor %}
         </div>
+        {% endfor %}
+      </div>
+  </div>
 
-        <div class="col-2">
-          <h3>Recipe Title 2</h3>
-          <img src=".../app/assets/logo.svg">
-          <p> Recipe description </p>
-        </div>
+<!-- Pagination -->
+  <nav class="box has-text-centered">
+    {% if recipes_pagination.prev_num %}
+      <a class="button is-dark" href="/?page={{ recipes_pagination.prev_num }}">Previous Page</a>
+    {% else %}
+      <span class="button">Previous Page</span>
+    {% endif %}
+  
+    {% if recipes_pagination.next_num %}
+      <a class="button is-dark" href="/?page={{ recipes_pagination.next_num }}">Next Page</a>
+    {% else %}
+      <span class="button">Next Page</span>
+    {% endif %}
+  </nav>
 
-        <div class="col-3">
-          <h3>Recipe Title 3</h3>
-          <img src="../app/assets/logo.svg">
-          <p> Recipe description </p>
-        </div>
-
-    </div>
 {% endblock %}
 
 </html>

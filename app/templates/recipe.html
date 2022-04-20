@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
-  {% extends 'base.html' %}
-  {% set active_page = '' %}
-  {% block title %}Cheffing Recipe{% endblock %}
-  
-  {% block body %}
+{% extends 'base.html' %}
+{% set active_page = '' %}
+{% block title %}Cheffing Recipe{% endblock %}
+
+{% block body %}
 
 <!-- Recipe -->
-    <div id="Recipe">
-        <h2>{{recipe}}</h2>
-        <p>Recipe coming soon...</p>
-    </div>
-  {% endblock %}
+  <div id="Recipe" class="has-text-centered">
+    <h2>{{ recipe.title }}</h2>
+    <img src="{{ recipe.image }}" alt="Picure of food relevant to this recipe." class="center">
+    <p class="small-p is-italic">Added by {{ recipe.chef_id }}</p>
+    <p class="has-text-weight-bold">{{ recipe.description }}</p>
+    <p>{{ recipe.instructions }}</p>
+    <a class="button is-dark" href="/">Back</a>
+  </div>
+
+{% endblock %}
 
 </html>

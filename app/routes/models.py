@@ -1,6 +1,6 @@
-from app.extensions.database import db
+from app.extensions.database import db, CRUDMixin
 
-class Recipe(db.Model):
+class Recipe(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
     slug = db.Column(db.String(50), unique=True)
     image = db.Column(db.String(250))
@@ -13,7 +13,7 @@ class Recipe(db.Model):
     chef_id = db.Column(db.Integer, db.ForeignKey('chef.id'), nullable=False)
 
 
-class Chef(db.Model):
+class Chef(db.Model, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
