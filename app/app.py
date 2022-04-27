@@ -1,6 +1,7 @@
 from flask import Flask
 from . import routes
 from app.extensions.database import db, migrate
+from app.extensions.authentication import login_manager
 
 def create_app():
     app = Flask(__name__)
@@ -19,3 +20,4 @@ def register_blueprints(app:Flask):
 def register_extensions(app:Flask):
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)

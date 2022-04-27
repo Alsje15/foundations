@@ -17,16 +17,33 @@
 <!-- Recipes -->
   <div id="Grid" class="has-text-centered">
       <h2>Our Recipes</h2>
+      <div>
+        <div class="dropdown">
+          <button class="button is-dark">Filter</button>
+          <div class="dropdown-content">
+          <a href="/#Grid">All</a>
+          <a href="/1#Grid">Other</a>
+          <a href="/2#Grid">Breakfast</a>
+          <a href="/3#Grid">Tapas/Snacks</a>
+          <a href="/4#Grid">Main Meals</a>
+          <a href="/5#Grid">Desserts</a>
+          </div>
+        </div>
+      </div>
       <div class="container">
         {% for row in recipes_pagination.items|batch(3) %}
         <div class="columns">
           {% for recipe in row %}
           <div class="column">
             <h3>{{ recipe.title }}</h3>
-            <p class="small-p is-italic">Recipe by {{ recipe.chef_id }}</p>
+            {% for chef in chefs %}
+            {% if chef.id == recipe.chef_id %}
+            <p class="small-p is-italic">Recipe by {{ chef.name }}</p>
             <img src="{{ recipe.image }}" alt="A picture relevant to the recipe."/>
             <p>{{ recipe.description }}</p>
             <a class="button is-dark is-small" href="/{{ recipe.slug }}">VIEW</a>
+            {% endif %}
+            {% endfor %}
           </div>
           {% endfor %}
         </div>

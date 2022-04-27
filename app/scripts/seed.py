@@ -5,11 +5,13 @@ from app.extensions.database import db
 app = create_app()
 app.app_context().push()
 
+#&#10&#10 &#8226
+
 recipes_data = {
     '1':{
-        'image':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxKcB2P30aFTTgtHsokrfFFKQkW7ndLTbM0Q&usqp=CAU', 
-        'title':'Creamy Tomato Soup', 
-        'category':3,
+        'image':'https://d2v9mhsiek5lbq.cloudfront.net/eyJidWNrZXQiOiJsb21hLW1lZGlhLXVrIiwia2V5IjoiZm9vZG5ldHdvcmstaW1hZ2UtNDY4YmNlMWMtMWZjNy00Njk1LWE5NzYtZTE5NWFmNjU3N2FiLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsIndpZHRoIjo4MTIsImhlaWdodCI6NDU3fSwianBlZyI6eyJxdWFsaXR5Ijo1NSwicHJvZ3Jlc3NpdmUiOnRydWV9fX0=', 
+        'title':'Blue Cheese Steak Sandwich', 
+        'category':5,
         'description':'A hearty soup perfect for a starter or a main with some quesadillas.',
         'instructions':'For 4 portions: \nCook 2 chopped onions in olive oil until tender and then add tomato paste. <br>Add 2 cans of tomatoes and vegetable broth - let it simmer for 3 minutes ... <br><br>Ingredients: <br>&#x2022 2 onions <br>&bull 5 tomatoes <br>&bull etc... ',
         'chef_id':2
@@ -80,6 +82,7 @@ chef_data = {
     },    
 } 
 
+# use to add
 for slug, recipe in recipes_data.items():
     new_recipe = Recipe(slug=slug, image=recipe['image'], title=recipe['title'], category=recipe['category'], description=recipe['description'], instructions=recipe['instructions'], chef_id=recipe['chef_id'])
     db.session.add(new_recipe)
@@ -92,5 +95,9 @@ for id, chef in chef_data.items():
 # recipes = Recipe.query.all()
 # for recipe in recipes:
 #     recipe.delete()
+
+# chefs = Chef.query.all()
+# for chef in chefs:
+#     chef.delete()
 
 db.session.commit()

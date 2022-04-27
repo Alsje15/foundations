@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, request, current_app
+from flask import Blueprint, render_template, redirect, request, current_app
+from flask_login import login_required, login_user, logout_user
 from .models import Recipe, Chef
 
 blueprint = Blueprint('routes',__name__)
@@ -6,14 +7,22 @@ blueprint = Blueprint('routes',__name__)
 @blueprint.route('/')
 def index():
     page_number = request.args.get('page', 1, type=int)
-    #category = request.args.get('filter_by', 1, type=int)
+    chefs = Chef.query.all()
     recipes_pagination = Recipe.query.paginate(page_number, current_app.config['RECIPES_PER_PAGE'])
+    return render_template('index.html', recipes_pagination=recipes_pagination, chefs=chefs)
+
+@blueprint.route('/<category>')
+def filter(category):
+    page_number = request.args.get('page', 1, type=int)
+    recipes_pagination = Recipe.query.filter_by(category=category).paginate(page_number, current_app.config['RECIPES_PER_PAGE'])
     return render_template('index.html', recipes_pagination=recipes_pagination)
+
 
 @blueprint.route('/<slug>')
 def recipe(slug):
     recipe = Recipe.query.filter_by(slug=slug).first_or_404()
     return render_template('recipe.html', recipe=recipe)
+
 
 @blueprint.route('/about')
 def about():
@@ -21,15 +30,40 @@ def about():
     chefs_pagination = Chef.query.paginate(page_number, current_app.config['CHEFS_PER_PAGE'])
     return render_template('about.html', chefs_pagination=chefs_pagination)
 
-@blueprint.route('/signin')
-def singin():
+
+@blueprint.get('/signin')
+def signin_get():
     return render_template('signin.html')
 
-@blueprint.route('/sign-in')
-def sign_in():
-    return redirect(url_for('signin.html'))
+@blueprint.post('/signin')
+def signin_post():
+    # try:
+    #     chefemail = Chef.query.filter_by(email=request.form.get('email'))
+    #     chefpass = Chef.query.filer_by(password=request.form.get('password'))
+
+    #     if not chefemail:
+    #         raise Exception('No user with the given email address was found.')
+            
+    #     elif not chefpass:
+    #         raise Exception('Incorrect password. Please try again. If the error persists please contact Cheffing.')
+
+    user = Chef.query.filter_by(email=request.form.get('email')).first()
+    login_user(user)
+
+    return redirect('/')
+
+    # except Exception as error_message:
+    #     error = error_message or 'An error occured while logging in. Please report this error to Cheffing if you are already a Cheffing member.'
+    #     return render_template('signin.html', error=error)
+
+@blueprint.get('/signout')
+def signout():
+    logout_user()
+    return redirect('/')
+
 
 @blueprint.get('/addrecipe')
+@login_required
 def addrecipe_get():
     recipe = Recipe.query.all()
     return render_template('addrecipe.html', recipe=recipe)
