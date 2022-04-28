@@ -35,13 +35,14 @@
         <div class="columns">
           {% for recipe in row %}
           <div class="column">
-            <h3>{{ recipe.title }}</h3>
             {% for chef in chefs %}
             {% if chef.id == recipe.chef_id %}
+            <h3>{{ recipe.title }}</h3>
             <p class="small-p is-italic">Recipe by {{ chef.name }}</p>
             <img src="{{ recipe.image }}" alt="A picture relevant to the recipe."/>
             <p>{{ recipe.description }}</p>
             <a class="button is-dark is-small" href="/{{ recipe.slug }}">VIEW</a>
+            <a class="button is-dark is-small" href="/reciperemover">DELETE</a>
             {% endif %}
             {% endfor %}
           </div>

@@ -1,6 +1,7 @@
 /* NAVBAR */
 #Nav-links {
     background-color: #333;
+    z-index: 999;
   } 
 
 #Nav-links .active {
@@ -101,7 +102,7 @@ p {
 
 /* FILTER LINKS (HOME) */
 .dropdown {
-  z-index: 999;
+  z-index: 2;
   display: inline-block;
   position: relative;
 }

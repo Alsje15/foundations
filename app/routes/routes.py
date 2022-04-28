@@ -14,8 +14,9 @@ def index():
 @blueprint.route('/<category>')
 def filter(category):
     page_number = request.args.get('page', 1, type=int)
+    chefs = Chef.query.all()
     recipes_pagination = Recipe.query.filter_by(category=category).paginate(page_number, current_app.config['RECIPES_PER_PAGE'])
-    return render_template('index.html', recipes_pagination=recipes_pagination)
+    return render_template('index.html', recipes_pagination=recipes_pagination, chefs=chefs)
 
 
 @blueprint.route('/<slug>')
@@ -38,15 +39,8 @@ def signin_get():
 @blueprint.post('/signin')
 def signin_post():
     # try:
-    #     chefemail = Chef.query.filter_by(email=request.form.get('email'))
-    #     chefpass = Chef.query.filer_by(password=request.form.get('password'))
 
-    #     if not chefemail:
-    #         raise Exception('No user with the given email address was found.')
-            
-    #     elif not chefpass:
-    #         raise Exception('Incorrect password. Please try again. If the error persists please contact Cheffing.')
-
+    # user = Chef.query.filter_by(email=request.form.get('email')).first()
     user = Chef.query.filter_by(email=request.form.get('email')).first()
     login_user(user)
 
@@ -74,13 +68,13 @@ def addrecipe_post():
 
     recipe = Recipe(
         # generate slug and get id?
-        slug=request.form.get('slug'),
+        #slug=request.form.get('slug'),
         image=request.form.get('image'),
         title=request.form.get('title'),
         category=request.form.get('category'),
         description=request.form.get('description'),
         instructions=request.form.get('instructions'),
-        chef_id=request.form.get('chef_id')
+        #chef_id= Logged in user's Chef.id?
     )
 
     if not all([
@@ -95,3 +89,10 @@ def addrecipe_post():
     # Does this work? Going back to index when saved
     # How to edit if yours? Same with about
     return render_template('index.html', recipe=recipe)
+
+# @blueprint.route('/removerecipe')
+# def removerecipe():    
+
+#     recipe.delete()
+
+#     return render_template('index.html')

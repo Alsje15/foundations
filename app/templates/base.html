@@ -36,14 +36,14 @@
         <div class="navbar-end">
           <a href="/" class="{{ 'active' if active_page == 'home' else '' }} navbar-item">Home</a>
           <a href="/about" class="{{ 'active' if active_page == 'about' else '' }} navbar-item">About</a>
-          <a href="/signin" class="{{ 'active' if active_page == 'signin' else '' }} navbar-item">Sign In</a>
           {% if current_user.is_authenticated %}
-            Logged in as {{current_user.user}}
-            <a href="/addrecipe" class="{{ 'active' if active_page == 'addrecipe' else '' }} navbar-item">Add Recipe</a>
-            <a href="/signout">Sign Out</a>  
+          <a href="/addrecipe" class="{{ 'active' if active_page == 'addrecipe' else '' }} navbar-item">Add Recipe</a>
+          <a href="/signout" class="navbar-item">Sign Out</a>
+          {% else %}  
+          <a href="/signin" class="{{ 'active' if active_page == 'signin' else '' }} navbar-item">Sign In</a>
           {% endif %}
         </div>
-        <!-- # Remove sign in and auto sign out when close/restart tab -->
+
       </div>
     </nav>
     {% endblock %}

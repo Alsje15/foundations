@@ -28,6 +28,9 @@
           <img src="{{ chef.image }}" alt="A picture relevant to the recipe."/>
           <p>{{ chef.description }}</p>
           <p>Email me at <a class="email-link" href="mailto:{{ chef.email }}?='Mail from Cheffing'" target="_blank">{{ chef.email }}</a></p>
+          {% if chef.email == current_user.user %}
+          <p>THIS IS YOU</p>
+          {% endif %}
         </div>
         {% endfor %}
       </div>
