@@ -21,12 +21,12 @@
         <div class="dropdown">
           <button class="button is-dark">Filter</button>
           <div class="dropdown-content">
-          <a href="/#Grid">All</a>
-          <a href="/1#Grid">Other</a>
-          <a href="/2#Grid">Breakfast</a>
-          <a href="/3#Grid">Tapas/Snacks</a>
-          <a href="/4#Grid">Main Meals</a>
-          <a href="/5#Grid">Desserts</a>
+          <a href="/category/#Grid">All</a>
+          <a href="/category/1#Grid">Other</a>
+          <a href="/category/2#Grid">Breakfast</a>
+          <a href="/category/3#Grid">Tapas/Snacks</a>
+          <a href="/category/4#Grid">Main Meals</a>
+          <a href="/category/5#Grid">Desserts</a>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
             <p class="small-p is-italic">Recipe by {{ chef.name }}</p>
             <img src="{{ recipe.image }}" alt="A picture relevant to the recipe."/>
             <p>{{ recipe.description }}</p>
-            <a class="button is-dark is-small" href="/{{ recipe.slug }}">VIEW</a>
+            <a class="button is-dark is-small" href="/recipe/{{ recipe.slug }}">VIEW</a>
             <a class="button is-dark is-small" href="/reciperemover">DELETE</a>
             {% endif %}
             {% endfor %}

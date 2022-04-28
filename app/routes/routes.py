@@ -11,7 +11,7 @@ def index():
     recipes_pagination = Recipe.query.paginate(page_number, current_app.config['RECIPES_PER_PAGE'])
     return render_template('index.html', recipes_pagination=recipes_pagination, chefs=chefs)
 
-@blueprint.route('/<category>')
+@blueprint.route('/category/<category>')
 def filter(category):
     page_number = request.args.get('page', 1, type=int)
     chefs = Chef.query.all()
@@ -19,7 +19,7 @@ def filter(category):
     return render_template('index.html', recipes_pagination=recipes_pagination, chefs=chefs)
 
 
-@blueprint.route('/<slug>')
+@blueprint.route('/recipe/<slug>')
 def recipe(slug):
     recipe = Recipe.query.filter_by(slug=slug).first_or_404()
     return render_template('recipe.html', recipe=recipe)
