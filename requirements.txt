@@ -23,7 +23,6 @@ platformdirs==2.5.1
 pluggy==1.0.0
 psycopg2==2.9.3
 py==1.11.0
-pygame==2.0.2
 pyparsing==3.0.8
 pytest==7.1.1
 python-dotenv==0.19.2
