@@ -81,21 +81,21 @@ chef_data = {
 } 
 
 # use to add
-# for slug, recipe in recipes_data.items():
-#     new_recipe = Recipe(slug=slug, image=recipe['image'], title=recipe['title'], category=recipe['category'], description=recipe['description'], instructions=recipe['instructions'], chef_id=recipe['chef_id'])
-#     db.session.add(new_recipe)
+for slug, recipe in recipes_data.items():
+    new_recipe = Recipe(slug=slug, image=recipe['image'], title=recipe['title'], category=recipe['category'], description=recipe['description'], instructions=recipe['instructions'], chef_id=recipe['chef_id'])
+    db.session.add(new_recipe)
 
-# for id, chef in chef_data.items():
-#     new_chef = Chef(id=id, email=chef['email'], password=chef['password'], name=chef['name'], image=chef['image'], description=chef['description'])
-#     db.session.add(new_chef)
+for id, chef in chef_data.items():
+    new_chef = Chef(id=id, email=chef['email'], password=chef['password'], name=chef['name'], image=chef['image'], description=chef['description'])
+    db.session.add(new_chef)
 
 # use to delete
-recipes = Recipe.query.all()
-for recipe in recipes:
-    recipe.delete()
+# recipes = Recipe.query.all()
+# for recipe in recipes:
+#     recipe.delete()
 
-chefs = Chef.query.all() 
-for chef in chefs:
-    chef.delete()
+# chefs = Chef.query.all() 
+# for chef in chefs:
+#     chef.delete()
 
 db.session.commit()
