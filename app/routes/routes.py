@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, current_app
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from .models import Recipe, Chef
+from slugify import slugify
 
 blueprint = Blueprint('routes',__name__)
 
@@ -38,17 +39,19 @@ def signin_get():
 
 @blueprint.post('/signin')
 def signin_post():
-    # try:
+    try:
+        user = Chef.query.filter_by(email=request.form.get('email'), password=request.form.get('password')).first()
 
-    # user = Chef.query.filter_by(email=request.form.get('email')).first()
-    user = Chef.query.filter_by(email=request.form.get('email')).first()
-    login_user(user)
+        if not user:
+            raise Exception('Incorrect sign in details. Please try again.')
 
-    return redirect('/')
+        login_user(user)
+        return redirect('/')
 
-    # except Exception as error_message:
-    #     error = error_message or 'An error occured while logging in. Please report this error to Cheffing if you are already a Cheffing member.'
-    #     return render_template('signin.html', error=error)
+    except Exception as error_message:
+        error = error_message or 'An error occured while logging in. Please report this error to Cheffing if you are already a Cheffing member.'
+        return render_template('signin.html', error=error)
+    
 
 @blueprint.get('/signout')
 def signout():
@@ -67,14 +70,13 @@ def addrecipe_post():
     recipe = Recipe.query.all()
 
     recipe = Recipe(
-        # generate slug and get id?
-        #slug=request.form.get('slug'),
+        slug=slugify(request.form.get('title', '')),
         image=request.form.get('image'),
         title=request.form.get('title'),
         category=request.form.get('category'),
         description=request.form.get('description'),
         instructions=request.form.get('instructions'),
-        #chef_id= Logged in user's Chef.id?
+        chef_id=current_user.get_id()
     )
 
     if not all([
@@ -85,14 +87,30 @@ def addrecipe_post():
         return render_template('addrecipe.html', recipe=recipe, error='Please fill out all fields.')
         
     recipe.save()
+    return redirect('/')
 
-    # Does this work? Going back to index when saved
-    # How to edit if yours? Same with about
-    return render_template('index.html', recipe=recipe)
 
-# @blueprint.route('/removerecipe')
-# def removerecipe():    
+@blueprint.route('/removerecipe/<id>')
+def removerecipe(id):    
 
-#     recipe.delete()
+    recipe = Recipe.query.filter_by(id=id).first_or_404()
+    recipe.delete()
 
-#     return render_template('index.html')
+    return redirect('/')
+
+
+@blueprint.route('/updatechef/<id>')
+def updatechef(id):    
+
+    chef = Chef.query.filter_by(id=id).first_or_404()
+
+    chef = Chef(
+        email=request.form.get('email'),
+        password=chef.password,
+        name=request.form.get('name'),
+        image=request.form.get('image'),        
+        description=request.form.get('description'),
+    )
+
+    chef.save()
+    return redirect('/about')

@@ -42,7 +42,9 @@
             <img src="{{ recipe.image }}" alt="A picture relevant to the recipe."/>
             <p>{{ recipe.description }}</p>
             <a class="button is-dark is-small" href="/recipe/{{ recipe.slug }}">VIEW</a>
-            <a class="button is-dark is-small" href="/reciperemover">DELETE</a>
+              {% if current_user.get_id()|int == chef.id %}
+              <a class="button is-dark is-small" href="/removerecipe/{{ recipe.id }}">DELETE</a>
+              {% endif %}
             {% endif %}
             {% endfor %}
           </div>
