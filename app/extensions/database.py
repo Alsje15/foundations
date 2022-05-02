@@ -14,3 +14,4 @@ class CRUDMixin():
         db.session.delete(self)
         db.session.commit()
         return
+

@@ -26,11 +26,30 @@ def recipe(slug):
     return render_template('recipe.html', recipe=recipe)
 
 
-@blueprint.route('/about')
+@blueprint.get('/about')
 def about():
     page_number = request.args.get('page', type=int)
     chefs_pagination = Chef.query.paginate(page_number, current_app.config['CHEFS_PER_PAGE'])
     return render_template('about.html', chefs_pagination=chefs_pagination)
+
+@blueprint.post('/about')
+def updatechef():    
+
+    chef = Chef.query.filter_by(id=current_user.get_id()).first_or_404()
+
+    chef.delete()
+
+    chef = Chef(
+        id=current_user.get_id(),
+        email=request.form.get('email'),
+        password=chef.password,
+        name=request.form.get('name'),
+        image=request.form.get('image'),        
+        description=request.form.get('description'),
+    )
+
+    chef.save()
+    return redirect('/about')
 
 
 @blueprint.get('/signin')
@@ -97,20 +116,3 @@ def removerecipe(id):
     recipe.delete()
 
     return redirect('/')
-
-
-@blueprint.route('/updatechef/<id>')
-def updatechef(id):    
-
-    chef = Chef.query.filter_by(id=id).first_or_404()
-
-    chef = Chef(
-        email=request.form.get('email'),
-        password=chef.password,
-        name=request.form.get('name'),
-        image=request.form.get('image'),        
-        description=request.form.get('description'),
-    )
-
-    chef.save()
-    return redirect('/about')
